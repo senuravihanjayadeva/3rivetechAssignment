@@ -1,8 +1,7 @@
 package com.rivetech.employeesystem.controllers;
 
-import com.rivetech.employeesystem.models.Department;
 import com.rivetech.employeesystem.models.Employee;
-import com.rivetech.employeesystem.services.EmployeeService;
+import com.rivetech.employeesystem.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,32 +13,35 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private EmployeeRepository employeeRepository;
 
     @PostMapping
-    public Employee addEmployee(@RequestBody Employee employee) throws Exception {
-        Employee response = employeeService.addEmployee(employee);
-        return response;
+    public Employee addEmployee(Employee employee){
+        return employeeRepository.save(employee);
     }
 
     @GetMapping("/")
-    public List<Employee> getAllEmployee() {
-        return employeeService.getAllEmployee();
+    public List<Employee> getAllEmployee(){
+        return (List<Employee>) employeeRepository.findAll();
     }
 
     @GetMapping("/{employeeID}")
-    public Employee getEmployeeById(@PathVariable String employeeID) {
-        return employeeService.getEmployeeById(employeeID);
+    public Employee getEmployeeById(String employeeID){
+        return employeeRepository.findById(employeeID).orElse(null);
     }
 
     @DeleteMapping("/{employeeID}")
-    public String deleteEmployeeByID(@PathVariable String employeeID){
-        return employeeService.deleteEmployeeByID(employeeID);
+    public String deleteEmployeeByID(String employeeID){
+        employeeRepository.deleteById(employeeID);
+        return "Employee Record deleted";
     }
 
     @PutMapping("/")
-    public Employee updateDepartmentById(@RequestBody Employee employee){
-        return employeeService.updateEmployeeById(employee);
+    public Employee updateEmployeeById(Employee employee){
+        Employee existingEmployee = employeeRepository.findById(employee.getEmployeeID()).orElse(null);
+        existingEmployee.setFirstName(employee.getFirstName());
+        existingEmployee.setLastName(employee.getLastName());
+        existingEmployee.setDepartment(employee.getDepartment());
+        return employeeRepository.save(existingEmployee);
     }
-
 }
