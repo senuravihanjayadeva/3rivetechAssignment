@@ -6,13 +6,14 @@ const initialState = {
   updatedDepartment: null,
   deletedDeapartment: null,
   loading: false,
+  addingStatus: false,
   error: null,
 };
 
 const departmentReducer = (state = initialState, action) => {
   switch (action.type) {
     case `${ActionTypes.ADD_DEPARTMENT}_PENDING`:
-      return { ...state, loading: true };
+      return { ...state, addingStatus: false, loading: true };
     case `${ActionTypes.GET_DEPARTMENTS}_PENDING`:
       return { ...state, loading: true };
     case `${ActionTypes.GET_DEPARTMENT}_PENDING`:
@@ -26,10 +27,12 @@ const departmentReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        departments: [...state.departments, action.payload],
+        addingStatus: true,
+        department: action.payload.data,
+        departments: [...state.departments, action.payload.data],
       };
     case `${ActionTypes.GET_DEPARTMENT}_FULFILLED`:
-      return { ...state, loading: false, department: action.payload };
+      return { ...state, loading: false, department: action.payload.data };
     case `${ActionTypes.GET_DEPARTMENTS}_FULFILLED`:
       return { ...state, loading: false, departments: action.payload };
     case `${ActionTypes.UPDATE_DEPARTMENT}_FULFILLED`:
