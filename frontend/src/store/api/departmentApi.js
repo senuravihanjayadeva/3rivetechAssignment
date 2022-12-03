@@ -20,7 +20,7 @@ class DepartmentAPI {
   }
 
   static deleteDepartmentByID(departmentID) {
-    return axios.get(`${BASE_URL}/api/department/${departmentID}`).then(()=>{
+    return axios.delete(`${BASE_URL}/api/department/${departmentID}`).then(()=>{
       return departmentID;
     });
   }

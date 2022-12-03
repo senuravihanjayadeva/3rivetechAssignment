@@ -20,13 +20,13 @@ const DepartmentForm = () => {
   return (
     <div>
       <div>
-        <div class="mb-3">
-          <label for="inputDepartmentId" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="inputDepartmentId" className="form-label">
             Department ID
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="inputDepartmentId"
             value={departmentID}
             onChange={(e) => {
@@ -34,13 +34,13 @@ const DepartmentForm = () => {
             }}
           />
         </div>
-        <div class="mb-3">
-          <label for="inputDepartmentName" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="inputDepartmentName" className="form-label">
             Name
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="inputDepartmentName"
             value={name}
             onChange={(e) => {
@@ -50,7 +50,7 @@ const DepartmentForm = () => {
         </div>
         <button
           type="submit"
-          class="btn btn-primary"
+          className="btn btn-primary"
           onClick={onClickAddDepartment}
         >
           Submit

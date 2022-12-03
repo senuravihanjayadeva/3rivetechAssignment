@@ -36,9 +36,9 @@ const departmentReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        updatedDepartment: action.payload,
+        updatedDepartment: action.payload.data,
         departments: state.departments.map((x) =>
-          x.departmentID === action.payload.departmentID ? action.payload : x
+          x.departmentID === action.payload.data.departmentID ? action.payload.data : x
         ),
       };
     case `${ActionTypes.DELETE_DEPARTMENT}_FULFILLED`:
