@@ -10,7 +10,7 @@ export const addEmployee = (employee) => {
 
 export const getAllEmployee = () => {
   return {
-    type: ActionTypes.GET_EMPLOYEE,
+    type: ActionTypes.GET_EMPLOYEES,
     payload: EmployeeAPI.getAllEmployee(),
   };
 };

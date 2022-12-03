@@ -20,7 +20,9 @@ class EmployeeAPI {
   }
 
   static deleteEmployeeByID(employeeID) {
-    return axios.get(`${BASE_URL}/api/employee/${employeeID}`);
+    return axios.delete(`${BASE_URL}/api/employee/${employeeID}`).then(()=>{
+      return employeeID;
+    });
   }
 }
 

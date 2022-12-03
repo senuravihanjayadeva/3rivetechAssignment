@@ -6,6 +6,7 @@ import {
   getDepartmentById
 } from "../../store/department-store/departmentActions";
 import DeapartmentEditModal from "../DepartmentEditModal";
+import EmployeeListModal from "../EmployeeListModal";
 
 const DepartmentTable = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,18 @@ const DepartmentTable = () => {
                   <td>{department.name}</td>
                   <td>
                     <button
+                      className="btn btn-success"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModalList"
+                      onClick={()=>{
+                        onClickGetDepartmentById(department.departmentID)
+                      }}
+                    >
+                      Employee List
+                    </button>
+                  </td>
+                  <td>
+                    <button
                       className="btn btn-primary"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
@@ -80,6 +93,15 @@ const DepartmentTable = () => {
         aria-hidden="true"
       >
         <DeapartmentEditModal />
+      </div>
+      <div
+        className="modal fade"
+        id="exampleModalList"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabelList"
+        aria-hidden="true"
+      >
+        <EmployeeListModal />
       </div>
     </>
   );
