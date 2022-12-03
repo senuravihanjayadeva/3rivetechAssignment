@@ -1,28 +1,28 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getAllDepartments,
-  deleteDepartmentByID,
-  getDepartmentById
-} from "../../store/department-store/departmentActions";
-import DeapartmentEditModal from "../DepartmentEditModal";
+  getAllEmployee,
+  deleteEmployeeByID,
+  getEmployeeById
+} from "../../store/employee-store/employeeActions";
+import EmployeeEditModal from "../EmployeeEditModal";
 
-const DepartmentTable = () => {
+const EmployeeTable = () => {
   const dispatch = useDispatch();
-  const departmentState = useSelector((state) => state.departmentReducer);
+  const employeeState = useSelector((state) => state.employeeReducer);
 
   useEffect(() => {
-    if (!departmentState.departments.length) {
-      dispatch(getAllDepartments());
+    if (!employeeState.employees.length) {
+      dispatch(getAllEmployee());
     }
-  }, [departmentState.departments]);
+  }, [employeeState.employees]);
 
-  const onClickDelete = (departmentID) => {
-    dispatch(deleteDepartmentByID(departmentID));
+  const onClickDelete = (employeeID) => {
+    dispatch(deleteEmployeeByID(employeeID));
   };
 
-  const onClickGetDepartmentById = (departmentID) => {
-    dispatch(getDepartmentById(departmentID));
+  const onClickGetEmployeeById = (employeeID) => {
+    dispatch(getEmployeeById(employeeID));
   }
 
   return (
@@ -31,27 +31,29 @@ const DepartmentTable = () => {
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Department ID</th>
-            <th scope="col">Department Name</th>
+            <th scope="col">Employee ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          {departmentState.departments.length &&
-            departmentState.departments.map((department, index) => {
+          {employeeState.employees.length &&
+            employeeState.employees.map((employee, index) => {
               return (
-                <tr key={department.departmentID}>
+                <tr key={employee.employeeID}>
                   <th scope="row">{++index}</th>
-                  <td>{department.departmentID}</td>
-                  <td>{department.name}</td>
+                  <td>{employee.employeeID}</td>
+                  <td>{employee.firstName}</td>
+                  <td>{employee.lastName}</td>
                   <td>
                     <button
                       className="btn btn-primary"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
                       onClick={()=>{
-                        onClickGetDepartmentById(department.departmentID)
+                        onClickGetEmployeeById(employee.employeeID)
                       }}
                     >
                       Edit
@@ -61,7 +63,7 @@ const DepartmentTable = () => {
                     <button
                       className="btn btn-danger"
                       onClick={() => {
-                        onClickDelete(department.departmentID);
+                        onClickDelete(employee.employeeID);
                       }}
                     >
                       Delete
@@ -79,10 +81,10 @@ const DepartmentTable = () => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <DeapartmentEditModal />
+        <EmployeeEditModal />
       </div>
     </>
   );
 };
 
-export default DepartmentTable;
+export default EmployeeTable;
