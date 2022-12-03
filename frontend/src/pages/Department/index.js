@@ -1,5 +1,5 @@
 import React from "react";
-import { DepartmentForm } from "../../components";
+import { DepartmentForm, DepartmentTable } from "../../components";
 const DepartmentComponent = () => {
   return (
     <div className="p-5">
@@ -7,6 +7,9 @@ const DepartmentComponent = () => {
       <div className="row">
         <div className="col-4">
           <DepartmentForm/>
+        </div>
+        <div className="col-8">
+          <DepartmentTable/>
         </div>
       </div>
     </div>
