@@ -42,7 +42,6 @@ const departmentReducer = (state = initialState, action) => {
         ),
       };
     case `${ActionTypes.DELETE_DEPARTMENT}_FULFILLED`:
-      console.log(action.payload)
       return {
         ...state,
         loading: false,

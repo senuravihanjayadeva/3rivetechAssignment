@@ -15,7 +15,7 @@ class EmployeeAPI {
     return axios.get(`${BASE_URL}/api/employee/${employeeID}`);
   }
 
-  static updateDepartmentById(employee) {
+  static updateEmployeeById(employee) {
     return axios.put(`${BASE_URL}/api/employee/`, employee);
   }
 
