@@ -16,7 +16,7 @@ public class DepartmentController {
     private DepartmentRepository departmentRepository;
 
     @PostMapping
-    public Department addDepartment(Department department){
+    public Department addDepartment(@RequestBody Department department){
         return departmentRepository.save(department);
     }
 
@@ -26,18 +26,18 @@ public class DepartmentController {
     }
 
     @GetMapping("/{departmentID}")
-    public Department getDepartmentById(String departmentID){
+    public Department getDepartmentById(@PathVariable String departmentID){
         return departmentRepository.findById(departmentID).orElse(null);
     }
 
     @DeleteMapping("/{departmentID}")
-    public String deleteDepartmentByID(String departmentID){
+    public String deleteDepartmentByID(@PathVariable String departmentID){
         departmentRepository.deleteById(departmentID);
         return "Department Record deleted";
     }
 
     @PutMapping("/")
-    public Department updateDepartmentById(Department department){
+    public Department updateDepartmentById(@RequestBody Department department){
         Department existingDepartment = departmentRepository.findById(department.getDepartmentID()).orElse(null);
         existingDepartment.setName(department.getName());
         if(department.getEmployees().size() > 0) {

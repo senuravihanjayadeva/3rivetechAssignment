@@ -16,7 +16,7 @@ public class EmployeeController {
     private EmployeeRepository employeeRepository;
 
     @PostMapping
-    public Employee addEmployee(Employee employee){
+    public Employee addEmployee(@RequestBody Employee employee){
         return employeeRepository.save(employee);
     }
 
@@ -26,18 +26,18 @@ public class EmployeeController {
     }
 
     @GetMapping("/{employeeID}")
-    public Employee getEmployeeById(String employeeID){
+    public Employee getEmployeeById(@PathVariable String employeeID){
         return employeeRepository.findById(employeeID).orElse(null);
     }
 
     @DeleteMapping("/{employeeID}")
-    public String deleteEmployeeByID(String employeeID){
+    public String deleteEmployeeByID(@PathVariable String employeeID){
         employeeRepository.deleteById(employeeID);
         return "Employee Record deleted";
     }
 
     @PutMapping("/")
-    public Employee updateEmployeeById(Employee employee){
+    public Employee updateEmployeeById(@RequestBody Employee employee){
         Employee existingEmployee = employeeRepository.findById(employee.getEmployeeID()).orElse(null);
         existingEmployee.setFirstName(employee.getFirstName());
         existingEmployee.setLastName(employee.getLastName());

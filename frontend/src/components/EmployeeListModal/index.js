@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const EmployeeListModal = () => {
   const departmentState = useSelector((state) => state.departmentReducer);
-  const [employees, setEmployees] = useState("");
+  const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
     if (departmentState.department) {

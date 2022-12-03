@@ -11,6 +11,7 @@ const DepartmentForm = () => {
     const department = {
       departmentID,
       name,
+      employees:[]
     };
     dispatch(addDepartment(department));
     setDepartmentID("");
